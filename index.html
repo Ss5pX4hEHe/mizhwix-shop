@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,51 +8,75 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#f4f4f6;--surface:#fff;--surface2:#f9f9fb;
+
+    /* ── LIGHT THEME ── */
+    :root,[data-theme="light"]{
+      --bg:#f4f4f6;--surface:#fff;--surface2:#f9f9fb;--surface3:#f0f0f4;
       --border:#e8e8ed;--border2:#d4d4dc;
       --text:#111118;--text2:#5a5a72;--text3:#9898b0;
       --accent:#2563eb;--accent-h:#1d4ed8;--accent-s:rgba(37,99,235,.08);
       --green:#16a34a;--red:#dc2626;
       --shadow-m:0 4px 16px rgba(0,0,0,.09);--shadow-l:0 12px 40px rgba(0,0,0,.13);
-      --r:10px;--r-s:7px;--r-l:14px
+      --admin-bg:#1e293b;--admin-text:#e2e8f0;
+      --r:10px;--r-s:7px;--r-l:14px;
+      --notice-bg:#eff6ff;--notice-border:#bfdbfe;--notice-text:#1e40af;--notice-link:#1d4ed8;--notice-tag:#dbeafe
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-    header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200}
-    .hd{max-width:1200px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;gap:18px}
-    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);text-decoration:none;flex-shrink:0;letter-spacing:-.4px;user-select:none;cursor:pointer}
+    /* ── DARK THEME ── */
+    [data-theme="dark"]{
+      --bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--surface3:#2a2e42;
+      --border:#2e3248;--border2:#3d4260;
+      --text:#e8eaf6;--text2:#9fa3c0;--text3:#5c6080;
+      --accent:#4f7eff;--accent-h:#3d6aee;--accent-s:rgba(79,126,255,.12);
+      --green:#22c55e;--red:#f87171;
+      --shadow-m:0 4px 20px rgba(0,0,0,.35);--shadow-l:0 12px 48px rgba(0,0,0,.5);
+      --admin-bg:#0d1117;--admin-text:#c9d1d9;
+      --notice-bg:#1e2d4a;--notice-border:#2d4a7a;--notice-text:#93c5fd;--notice-link:#60a5fa;--notice-tag:#1e3a5f
+    }
+
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+
+    /* HEADER */
+    header{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .2s,border-color .2s}
+    .hd{max-width:1200px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;gap:16px}
+    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);text-decoration:none;flex-shrink:0;letter-spacing:-.4px;user-select:none;cursor:pointer;transition:color .2s}
     .logo em{color:var(--accent);font-style:normal}
-    .hd-search{flex:1;max-width:400px;position:relative}
-    .hd-search input{width:100%;height:34px;padding:0 12px 0 34px;border:1.5px solid var(--border);border-radius:var(--r-s);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .15s}
+    .hd-search{flex:1;max-width:380px;position:relative}
+    .hd-search input{width:100%;height:34px;padding:0 12px 0 34px;border:1.5px solid var(--border);border-radius:var(--r-s);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .15s,background .2s}
     .hd-search input::placeholder{color:var(--text3)}
-    .hd-search input:focus{border-color:var(--accent);background:#fff}
+    .hd-search input:focus{border-color:var(--accent);background:var(--surface)}
     .hd-search .ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
-    .hd-right{display:flex;align-items:center;gap:7px;margin-left:auto}
+    .hd-right{display:flex;align-items:center;gap:6px;margin-left:auto}
     .hbtn{height:34px;padding:0 13px;border-radius:var(--r-s);border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;position:relative}
     .hbtn:hover{border-color:var(--border2);color:var(--text);background:var(--surface2)}
     .hbtn .dot{position:absolute;top:-5px;right:-5px;width:16px;height:16px;background:var(--red);color:#fff;font-size:9px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface)}
-    .admin-bar{background:#1e293b;color:#e2e8f0;padding:8px 20px;display:none;align-items:center;gap:10px;font-size:13px}
+    .theme-btn{width:34px;height:34px;padding:0;justify-content:center;font-size:16px}
+
+    /* ADMIN BAR */
+    .admin-bar{background:var(--admin-bg);color:var(--admin-text);padding:8px 20px;display:none;align-items:center;gap:8px;font-size:13px;transition:background .2s}
     .admin-bar.on{display:flex}
     .admin-bar span{flex:1}
-    .admin-bar button{height:28px;padding:0 12px;border-radius:6px;border:none;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;background:#334155;color:#e2e8f0;transition:background .15s}
-    .admin-bar button:hover{background:#475569}
-    .admin-bar .btn-exit{background:#7f1d1d;color:#fca5a5}
-    .admin-bar .btn-exit:hover{background:#991b1b}
+    .admin-bar button{height:28px;padding:0 12px;border-radius:6px;border:none;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;background:rgba(255,255,255,.1);color:var(--admin-text);transition:background .15s}
+    .admin-bar button:hover{background:rgba(255,255,255,.18)}
+    .admin-bar .btn-exit{background:rgba(220,38,38,.25);color:#fca5a5}
+    .admin-bar .btn-exit:hover{background:rgba(220,38,38,.4)}
 
-    .notice{background:#eff6ff;border-bottom:1px solid #bfdbfe;padding:8px 20px;text-align:center;font-size:13px;color:#1e40af}
-    .notice a{color:#1d4ed8;font-weight:600;text-decoration:none}
+    /* NOTICE */
+    .notice{background:var(--notice-bg);border-bottom:1px solid var(--notice-border);padding:8px 20px;text-align:center;font-size:13px;color:var(--notice-text);transition:all .2s}
+    .notice a{color:var(--notice-link);font-weight:600;text-decoration:none}
     .notice a:hover{text-decoration:underline}
-    .ntag{background:#dbeafe;border-radius:4px;padding:1px 7px;margin-right:8px;font-weight:700;font-size:11px}
+    .ntag{background:var(--notice-tag);border-radius:4px;padding:1px 7px;margin-right:8px;font-weight:700;font-size:11px}
 
-    .col-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px}
+    /* COLLECTIONS BAR */
+    .col-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;transition:background .2s,border-color .2s}
     .col-bar-inner{max-width:1200px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
     .col-bar-inner::-webkit-scrollbar{display:none}
     .col-tab{height:40px;padding:0 14px;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
     .col-tab:hover{color:var(--text)}
     .col-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
 
+    /* PAGE */
     .page{max-width:1200px;margin:0 auto;padding:24px 20px 80px}
     .tb{display:flex;align-items:center;gap:6px;margin-bottom:20px;flex-wrap:wrap}
     .tbbtn{height:30px;padding:0 12px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;cursor:pointer;transition:all .15s}
@@ -60,54 +84,80 @@
     .tbbtn.on{background:var(--accent-s);border-color:var(--accent);color:var(--accent);font-weight:600}
     .tb-cnt{margin-left:auto;font-size:12.5px;color:var(--text3)}
 
+    /* REORDER BAR */
     .reorder-bar{display:none;background:#fff8e7;border:1.5px solid #fcd34d;border-radius:var(--r-s);padding:10px 14px;margin-bottom:16px;font-size:13px;color:#92400e;align-items:center;gap:10px}
+    [data-theme="dark"] .reorder-bar{background:#2a2200;border-color:#854d0e;color:#fcd34d}
     .reorder-bar.on{display:flex}
     .reorder-bar button{height:28px;padding:0 12px;border-radius:6px;border:none;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer}
     .reorder-bar .btn-save{background:var(--accent);color:#fff}
     .reorder-bar .btn-cancel{background:var(--border);color:var(--text2)}
 
+    /* GRID */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .18s;animation:fu .3s ease both;position:relative}
+
+    /* CARD */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .18s,background .2s;animation:fu .3s ease both;position:relative}
     @keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
     .card:hover{box-shadow:var(--shadow-m);border-color:var(--border2);transform:translateY(-2px)}
     .card.dragging{opacity:.4;transform:scale(.97)}
     .card.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-s)}
-
-    /* QUICK DELETE BUTTON */
-    .card-del{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:6px;background:var(--red);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:14px;font-weight:700;z-index:10;transition:transform .15s;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-    .card-del:hover{transform:scale(1.1)}
-    .admin-mode .card-del{display:flex}
+    .card-admin-btns{position:absolute;top:8px;right:8px;display:none;gap:5px;z-index:10}
+    .admin-mode .card-admin-btns{display:flex}
     .admin-mode .card:hover{transform:none}
-    .admin-mode .cbb{display:none}
-    .admin-mode .cbf{display:none}
+    .cbtn{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:transform .15s}
+    .cbtn:hover{transform:scale(1.1)}
+    .cbtn-edit{background:#fff;color:var(--accent)}
+    .cbtn-del{background:var(--red);color:#fff}
+    [data-theme="dark"] .cbtn-edit{background:var(--surface2);color:var(--accent)}
 
+    /* CARD IMAGE */
     .card-img{position:relative;overflow:hidden;background:var(--surface2);aspect-ratio:16/10}
-    .card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;background:var(--surface2)}
+    .card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
     .card:hover:not(.admin-mode *) .card-img img{transform:scale(1.04)}
-    .card-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--surface2);color:var(--text3);position:absolute;top:0;left:0}
+    .card-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--surface2);color:var(--text3);position:absolute;top:0;left:0;transition:background .2s}
     .card-lbl{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;letter-spacing:.4px;padding:2px 7px;border-radius:4px;z-index:2}
     .drag-handle{position:absolute;bottom:8px;right:8px;width:24px;height:24px;background:rgba(255,255,255,.9);border-radius:5px;display:none;align-items:center;justify-content:center;cursor:grab;font-size:12px;color:var(--text2);z-index:5}
+    [data-theme="dark"] .drag-handle{background:rgba(0,0,0,.6);color:var(--text2)}
     .reorder-mode .drag-handle{display:flex}
 
+    /* CARD BODY */
     .card-body{padding:12px 13px 13px}
     .card-cat{font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
-    .card-name{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .card-desc{font-size:12px;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:11px}
+    .card-name{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s}
+    .card-desc{font-size:12px;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px;transition:color .2s}
+
+    /* TAGS */
+    .card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px}
+    .tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.3px}
+    .tag-hot{background:#fff1f2;color:#e11d48}[data-theme="dark"] .tag-hot{background:#3f0d1a;color:#fb7185}
+    .tag-sale{background:#f0fdf4;color:#16a34a}[data-theme="dark"] .tag-sale{background:#052e16;color:#4ade80}
+    .tag-last{background:#fffbeb;color:#d97706}[data-theme="dark"] .tag-last{background:#2a1800;color:#fbbf24}
+    .tag-new{background:#eff6ff;color:#2563eb}[data-theme="dark"] .tag-new{background:#0f1f40;color:#60a5fa}
+    .tag-custom{background:var(--surface3);color:var(--text2)}
+
     .card-ft{display:flex;align-items:center;gap:7px}
-    .card-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--text);flex:1}
+    .card-price{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--text);flex:1;transition:color .2s}
     .card-price span{font-size:11.5px;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif}
     .cbf{width:30px;height:30px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;flex-shrink:0}
     .cbf:hover,.cbf.on{border-color:#f43f5e;color:#f43f5e;background:#fff1f2}
+    [data-theme="dark"] .cbf:hover,[data-theme="dark"] .cbf.on{background:#3f0d1a}
     .cbb{height:30px;padding:0 13px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s}
     .cbb:hover{background:var(--accent-h)}
+    .admin-mode .cbb,.admin-mode .cbf{display:none}
+
+    /* SHARE BUTTON on card */
+    .card-share{position:absolute;bottom:8px;left:8px;width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.85);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;opacity:0;transition:opacity .2s,background .2s;z-index:3}
+    [data-theme="dark"] .card-share{background:rgba(0,0,0,.6)}
+    .card:hover .card-share{opacity:1}
 
     .empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text3)}
     .empty h3{font-family:'Syne',sans-serif;font-size:16px;color:var(--text2);margin-bottom:5px}
     .empty p{font-size:13.5px}
 
-    .ov{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(2px)}
+    /* OVERLAY */
+    .ov{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(3px)}
     .ov.on{opacity:1;pointer-events:all}
-    .modal{background:var(--surface);border-radius:var(--r-l);box-shadow:var(--shadow-l);width:100%;transform:translateY(14px) scale(.98);transition:transform .2s;max-height:90vh;overflow-y:auto}
+    .modal{background:var(--surface);border-radius:var(--r-l);box-shadow:var(--shadow-l);width:100%;transform:translateY(14px) scale(.98);transition:transform .2s,background .2s;max-height:90vh;overflow-y:auto}
     .ov.on .modal{transform:none}
     .modal::-webkit-scrollbar{width:4px}.modal::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
     .mh{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border)}
@@ -115,13 +165,15 @@
     .mx{width:30px;height:30px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .15s}
     .mx:hover{background:var(--border);color:var(--text)}
 
+    /* DETAIL */
     .m-detail{max-width:620px;position:relative}
     .d-img-wrap{position:relative;background:var(--surface2);aspect-ratio:16/9;overflow:hidden}
     .d-img{width:100%;height:100%;object-fit:cover;display:block}
-    .d-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--text3);position:absolute;top:0;left:0}
+    .d-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:56px;color:var(--text3);position:absolute;top:0;left:0;background:var(--surface2)}
     .d-body{padding:20px}
     .d-cat{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px}
     .d-name{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;margin-bottom:9px;line-height:1.3}
+    .d-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
     .d-desc{font-size:13.5px;color:var(--text2);line-height:1.65;margin-bottom:18px}
     .d-price{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:16px}
     .d-acts{display:flex;gap:9px}
@@ -129,13 +181,18 @@
     .d-buy:hover{background:var(--accent-h)}
     .d-fav{width:42px;height:42px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all .15s}
     .d-fav:hover,.d-fav.on{border-color:#f43f5e;color:#f43f5e;background:#fff1f2}
+    [data-theme="dark"] .d-fav:hover,[data-theme="dark"] .d-fav.on{background:#3f0d1a}
+    .d-share{height:42px;padding:0 14px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px}
+    .d-share:hover{border-color:var(--border2);color:var(--text)}
     .d-note{font-size:11.5px;color:var(--text3);text-align:center;margin-top:10px}
 
+    /* PASS */
     .m-pass{max-width:340px}
     .pb{padding:22px 20px}
     .pb p{font-size:13px;color:var(--text2);margin-bottom:16px}
 
-    .m-admin{max-width:640px}
+    /* ADMIN */
+    .m-admin{max-width:660px}
     .atabs{display:flex;padding:0 20px;border-bottom:1px solid var(--border);gap:2px;overflow-x:auto;scrollbar-width:none}
     .at{height:42px;padding:0 13px;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
     .at:hover{color:var(--text)}
@@ -144,12 +201,12 @@
     .ts{display:none}.ts.on{display:block}
     .fl{margin-bottom:13px}
     .lbl{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px}
-    .fi,.fsel,.fta{width:100%;height:36px;padding:0 11px;border:1.5px solid var(--border);border-radius:var(--r-s);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .15s}
+    .fi,.fsel,.fta{width:100%;height:36px;padding:0 11px;border:1.5px solid var(--border);border-radius:var(--r-s);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .15s,background .2s,color .2s}
     .fi:focus,.fsel:focus,.fta:focus{border-color:var(--accent)}
     .fi.er{border-color:var(--red)}
     .fta{height:auto;padding:9px 11px;resize:vertical;min-height:68px}
     .fsel{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239898b0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
-    .fhint{font-size:11.5px;color:var(--text3);margin-top:4px}
+    .fhint{font-size:11.5px;color:var(--text3);margin-top:4px;line-height:1.5}
     .iarea{width:100%;aspect-ratio:16/8;border-radius:var(--r-s);border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px;margin-bottom:7px;background:var(--surface2);cursor:pointer;transition:border-color .15s;overflow:hidden}
     .iarea:hover{border-color:var(--accent);color:var(--accent)}
     .iarea img{width:100%;height:100%;object-fit:cover}
@@ -157,27 +214,50 @@
     .bsub:hover{background:var(--accent-h)}
     .bsub:disabled{opacity:.6;cursor:not-allowed}
     .bdan{height:34px;padding:0 13px;border-radius:var(--r-s);border:1.5px solid #fecaca;background:#fff5f5;color:var(--red);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+    [data-theme="dark"] .bdan{background:#2a0a0a;border-color:#7f1d1d}
     .bdan:hover{background:#fee2e2}
+    [data-theme="dark"] .bdan:hover{background:#3f0d0d}
     .fmsg{font-size:12px;margin-top:7px;display:none}
     .fmsg.ok{color:var(--green);display:block}
     .fmsg.er{color:var(--red);display:block}
+
+    /* TAG SELECTOR */
+    .tag-selector{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+    .tag-opt{height:26px;padding:0 10px;border-radius:5px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+    .tag-opt:hover{border-color:var(--accent);color:var(--accent)}
+    .tag-opt.on{background:var(--accent-s);border-color:var(--accent);color:var(--accent)}
+
     .apl{display:flex;flex-direction:column;gap:7px}
-    .api{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-s);background:var(--surface2)}
+    .api{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-s);background:var(--surface2);transition:background .2s}
     .api img{width:40px;height:40px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--border)}
     .api .iph{width:40px;height:40px;border-radius:6px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
     .api-info{flex:1;min-width:0}
     .api-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .api-price{font-size:12px;color:var(--text2)}
+    .api-actions{display:flex;gap:5px}
+    .api-btn{height:28px;padding:0 10px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+    .api-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .api-btn.danger{border-color:#fecaca;background:#fff5f5;color:var(--red)}
+    [data-theme="dark"] .api-btn.danger{background:#2a0a0a;border-color:#7f1d1d}
+    .api-btn.danger:hover{background:#fee2e2}
+    [data-theme="dark"] .api-btn.danger:hover{background:#3f0d0d}
 
+    /* EDIT FORM inline */
+    .edit-form{background:var(--surface3);border:1px solid var(--border);border-radius:var(--r-s);padding:14px;margin-top:8px;display:none;transition:background .2s}
+    .edit-form.on{display:block}
+    .edit-row{display:flex;gap:8px;margin-bottom:8px}
+    .edit-row .fi{flex:1}
+
+    /* COLLECTIONS */
     .col-list{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
-    .col-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-s);background:var(--surface2)}
+    .col-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--border);border-radius:var(--r-s);background:var(--surface2);transition:background .2s}
     .col-item .ce{font-size:20px}
     .col-item .cn{flex:1;font-size:13.5px;font-weight:600}
     .col-item .cc{font-size:12px;color:var(--text3)}
     .new-col-row{display:flex;gap:8px}
     .new-col-row .emoji-in{width:52px;text-align:center}
     .assign-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
-    .assign-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-s);cursor:pointer;transition:border-color .15s}
+    .assign-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--border);border-radius:var(--r-s);cursor:pointer;transition:border-color .15s,background .15s}
     .assign-item:hover{border-color:var(--accent)}
     .assign-item.sel{border-color:var(--accent);background:var(--accent-s)}
     .assign-item img{width:36px;height:36px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--border)}
@@ -186,16 +266,19 @@
     .assign-item .chk{width:18px;height:18px;border:1.5px solid var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px}
     .assign-item.sel .chk{background:var(--accent);border-color:var(--accent);color:#fff}
 
+    /* FAVS */
     .m-favs{max-width:840px}
     .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:11px;padding:18px 20px}
 
+    /* TOAST */
     .tst-wrap{position:fixed;bottom:18px;right:18px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
     .tst{background:#1c1c28;color:#fff;border-radius:var(--r-s);padding:9px 15px;font-size:13px;font-weight:500;box-shadow:var(--shadow-m);animation:ti .2s ease;max-width:260px}
     @keyframes ti{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
     .tst.ok{background:#14532d}
     .tst.er{background:#7f1d1d}
 
-    footer{background:var(--surface);border-top:1px solid var(--border);padding:24px 20px}
+    /* FOOTER */
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:24px 20px;transition:background .2s,border-color .2s}
     .fi2{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
     .flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px}
     .flogo em{color:var(--accent);font-style:normal}
@@ -206,8 +289,8 @@
 
     .skel{background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shim 1.2s infinite;border-radius:var(--r-l);min-height:240px}
     @keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
-    @media(max-width:600px){.hd{gap:8px}.hbtn .lbl{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}}
     @keyframes sk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.sk{animation:sk .3s}
+    @media(max-width:600px){.hd{gap:8px}.hbtn .lbl{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px}}
   </style>
 </head>
 <body>
@@ -217,9 +300,10 @@
     <a class="logo" id="logoBtn">MIZHWIX<em>.</em></a>
     <div class="hd-search">
       <svg class="ico" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="q" type="text" placeholder="Поиск по названию или описанию…" oninput="render()">
+      <input id="q" type="text" placeholder="Поиск…" oninput="render()">
     </div>
     <div class="hd-right">
+      <button class="hbtn theme-btn" id="themeBtn" onclick="toggleTheme()" title="Тема">🌙</button>
       <button class="hbtn" onclick="openFavs()">
         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span class="lbl">Избранное</span>
@@ -229,9 +313,8 @@
   </div>
 </header>
 
-<!-- ADMIN BAR (visible when logged in) -->
 <div class="admin-bar" id="adminBar">
-  <span>⚙ Режим администратора — нажмите ✕ на карточке чтобы удалить товар</span>
+  <span>⚙ Режим администратора — ✕ удалить, ✏️ редактировать</span>
   <button onclick="openAdmin()">Панель</button>
   <button onclick="toggleReorder()" id="reorderBtnBar">⇅ Порядок</button>
   <button class="btn-exit" onclick="exitAdmin()">Выйти</button>
@@ -311,8 +394,10 @@
       <button class="at" onclick="atab('cfg',this)">Настройки</button>
     </div>
     <div class="ab">
+
+      <!-- ADD TAB -->
       <div class="ts on" id="ts-add">
-        <div class="fl"><label class="lbl">Название *</label><input class="fi" id="nN" type="text" placeholder="Например: Аккаунт Valorant с BP…" maxlength="120"></div>
+        <div class="fl"><label class="lbl">Название *</label><input class="fi" id="nN" type="text" placeholder="Аккаунт Valorant с BP…" maxlength="120"></div>
         <div class="fl"><label class="lbl">Цена (₽) *</label><input class="fi" id="nPr" type="number" placeholder="500" min="0"></div>
         <div class="fl">
           <label class="lbl">Изображение</label>
@@ -322,18 +407,33 @@
         </div>
         <div class="fl"><label class="lbl">Категория</label><select class="fsel" id="nCt"><option value="">Без категории</option><option>Аккаунты</option><option>Игровая валюта</option><option>Предметы</option><option>Другое</option></select></div>
         <div class="fl"><label class="lbl">Папка</label><select class="fsel" id="nCol"><option value="">Без папки</option></select></div>
+        <div class="fl">
+          <label class="lbl">Теги</label>
+          <div class="tag-selector" id="tagSelector">
+            <button class="tag-opt" data-tag="🔥 Горячее" onclick="togTag(this)">🔥 Горячее</button>
+            <button class="tag-opt" data-tag="💸 Скидка" onclick="togTag(this)">💸 Скидка</button>
+            <button class="tag-opt" data-tag="⚡ Последний" onclick="togTag(this)">⚡ Последний</button>
+            <button class="tag-opt" data-tag="✨ Новинка" onclick="togTag(this)">✨ Новинка</button>
+          </div>
+          <input class="fi" id="nTagCustom" type="text" placeholder="Или свой тег…" maxlength="20" style="margin-top:7px">
+          <p class="fhint">Выберите готовые теги или введите свой</p>
+        </div>
         <div class="fl"><label class="lbl">Описание <span style="font-weight:400;color:var(--text3)">(необязательно)</span></label><textarea class="fta" id="nD" placeholder="Подробнее о товаре…"></textarea></div>
         <button class="bsub" id="addBtn" onclick="addP()">Добавить товар</button>
         <div class="fmsg" id="AOk">Товар добавлен</div>
         <div class="fmsg" id="AEr">Заполните название и цену</div>
       </div>
+
+      <!-- LIST TAB -->
       <div class="ts" id="ts-list"><div class="apl" id="APL"></div></div>
+
+      <!-- COLS TAB -->
       <div class="ts" id="ts-cols">
         <div class="col-list" id="adminColList"></div>
         <p style="font-size:12.5px;color:var(--text2);margin-bottom:10px;font-weight:600">Создать папку</p>
         <div class="new-col-row">
           <input class="fi emoji-in" id="newColEmoji" type="text" placeholder="📦" maxlength="2" value="📦">
-          <input class="fi" id="newColName" type="text" placeholder="Название папки…" maxlength="40" onkeydown="if(event.key==='Enter')createCol()">
+          <input class="fi" id="newColName" type="text" placeholder="Название…" maxlength="40" onkeydown="if(event.key==='Enter')createCol()">
           <button class="bsub" style="width:auto;padding:0 16px" onclick="createCol()">Создать</button>
         </div>
         <div class="fmsg" id="COk">Папка создана</div>
@@ -346,6 +446,8 @@
           <div class="fmsg" id="ASok">Сохранено</div>
         </div>
       </div>
+
+      <!-- CFG TAB -->
       <div class="ts" id="ts-cfg">
         <div class="fl">
           <label class="lbl">Telegram юзернейм</label>
@@ -359,6 +461,7 @@
           <button class="bdan" onclick="clrAll()">Удалить все товары</button>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -375,38 +478,46 @@
 const SB_URL="https://elyxbizgvcvbsokhmaoj.supabase.co";
 const SB_KEY="sb_publishable_hKJZaOMPDltF1zJimnMnwA_CPalxqDS";
 const PWD="Xq7#mK$9pZ@wL!2vR";
+const TAG_PRESETS=["🔥 Горячее","💸 Скидка","⚡ Последний","✨ Новинка"];
+const TAG_CLASSES={"🔥 Горячее":"tag-hot","💸 Скидка":"tag-sale","⚡ Последний":"tag-last","✨ Новинка":"tag-new"};
 
-let allProducts=[];
-let allCols=[];
+let allProducts=[],allCols=[];
 let favs=JSON.parse(localStorage.getItem("mz_f")||"[]");
 let tg=localStorage.getItem("mz_t")||"mizhwix";
-let sortMode="new";
-let activeCol=null;
-let reordering=false;
-let dragSrcId=null;
-let displayedIds=[];
-let adminMode=false;
-let assignColId=null;
-let assignSelected=new Set();
-let pendImg=null;
+let sortMode="new",activeCol=null,reordering=false,dragSrcId=null,displayedIds=[];
+let adminMode=false,assignColId=null,assignSelected=new Set();
+let pendImg=null,selectedTags=new Set();
+let editingId=null;
 
-// ─── HIDDEN ADMIN: triple-click logo ───
+// ── THEME ──
+const savedTheme=localStorage.getItem("mz_theme")||"light";
+document.documentElement.setAttribute("data-theme",savedTheme);
+document.getElementById("themeBtn").textContent=savedTheme==="dark"?"☀️":"🌙";
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute("data-theme");
+  const next=cur==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",next);
+  localStorage.setItem("mz_theme",next);
+  document.getElementById("themeBtn").textContent=next==="dark"?"☀️":"🌙";
+}
+
+// ── HIDDEN ADMIN triple-click ──
 let lc=0,lt;
 document.getElementById("logoBtn").addEventListener("click",()=>{
   lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,600);
   if(lc>=3){lc=0;openAuth();}
 });
 
-// ─── SUPABASE ───
+// ── SUPABASE ──
 async function sb(path,opts={}){
   const r=await fetch(`${SB_URL}/rest/v1/${path}`,{
     ...opts,
     headers:{"apikey":SB_KEY,"Authorization":`Bearer ${SB_KEY}`,"Content-Type":"application/json","Prefer":"return=representation",...(opts.headers||{})}
   });
-  const t=await r.text();
-  return t?JSON.parse(t):[];
+  const t=await r.text();return t?JSON.parse(t):[];
 }
 
+// ── INIT ──
 async function init(){
   updLinks();updFavDot();
   try{
@@ -414,10 +525,26 @@ async function init(){
       sb("collections?select=*&order=sort_order.asc,created_at.asc"),
       sb("products?select=*&order=sort_order.asc,created_at.desc")
     ]);
-  }catch(e){console.error(e);}
-  renderColBar();render();
+  }catch(err){console.error(err);}
+  renderColBar();
+  // Handle direct product URL: #product-ID
+  const hash=location.hash;
+  if(hash.startsWith("#product-")){
+    const id=hash.replace("#product-","");
+    const p=allProducts.find(x=>x.id===id);
+    if(p) setTimeout(()=>openDetail(id),100);
+  }
+  render();
 }
 init();
+
+window.addEventListener("hashchange",()=>{
+  const hash=location.hash;
+  if(hash.startsWith("#product-")){
+    const id=hash.replace("#product-","");
+    openDetail(id);
+  }
+});
 
 function updLinks(){
   const u=`https://t.me/${tg}`;
@@ -425,14 +552,28 @@ function updLinks(){
   document.getElementById("tgFt").href=u;document.getElementById("tgFt").textContent=`@${tg}`;
 }
 
-// ─── COLLECTIONS BAR ───
+// ── TAG HELPERS ──
+function parseTags(tagStr){
+  if(!tagStr||!tagStr.trim()) return [];
+  return tagStr.split(",").map(t=>t.trim()).filter(Boolean);
+}
+function renderTags(tagStr,big=false){
+  const tags=parseTags(tagStr);
+  if(!tags.length) return "";
+  return tags.map(t=>{
+    const cls=TAG_CLASSES[t]||"tag-custom";
+    return `<span class="tag ${cls}">${e(t)}</span>`;
+  }).join("");
+}
+
+// ── COLLECTIONS BAR ──
 function renderColBar(){
   const bar=document.getElementById("colBar");
-  bar.innerHTML=`<button class="col-tab${activeCol===null?' on':''}" onclick="setCol(null,this)">Все товары</button>`;
+  bar.innerHTML=`<button class="col-tab${activeCol===null?" on":""}" onclick="setCol(null,this)">Все товары</button>`;
   allCols.forEach(c=>{
     const btn=document.createElement("button");
     btn.className="col-tab"+(activeCol===c.id?" on":"");
-    btn.textContent=`${c.emoji||'📦'} ${c.name}`;
+    btn.textContent=`${c.emoji||"📦"} ${c.name}`;
     btn.onclick=()=>setCol(c.id,btn);
     bar.appendChild(btn);
   });
@@ -440,145 +581,87 @@ function renderColBar(){
 function setCol(id,btn){
   activeCol=id;
   document.querySelectorAll(".col-tab").forEach(b=>b.classList.remove("on"));
-  btn.classList.add("on");
-  cancelReorder();render();
+  btn.classList.add("on");cancelReorder();render();
 }
 
-// ─── RENDER ───
+// ── RENDER ──
 function render(){
   const q=document.getElementById("q").value.toLowerCase().trim();
   let list=[...allProducts];
   if(activeCol) list=list.filter(p=>p.collection_id===activeCol);
-  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||(p.description||"").toLowerCase().includes(q));
+  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||(p.description||"").toLowerCase().includes(q)||(p.tags||"").toLowerCase().includes(q));
   if(sortMode==="asc") list.sort((a,b)=>a.price-b.price);
   else if(sortMode==="desc") list.sort((a,b)=>b.price-a.price);
   displayedIds=list.map(p=>p.id);
   document.getElementById("cnt").textContent=`${list.length} товар${suf(list.length)}`;
-
   const g=document.getElementById("G");
   g.className="grid"+(reordering?" reorder-mode":"")+(adminMode?" admin-mode":"");
-
   if(!list.length){
     g.innerHTML=`<div class="empty"><h3>${q?"Ничего не найдено":"Товаров пока нет"}</h3><p>${q?"Попробуйте другой запрос":"Скоро здесь появятся товары"}</p></div>`;
     return;
   }
-
   g.innerHTML=list.map((p,i)=>`
     <div class="card" data-id="${p.id}" style="animation-delay:${Math.min(i,8)*.035}s"
       onclick="cardClick(event,'${p.id}')"
-      ${reordering?`draggable="true" ondragstart="dStart(event,'${p.id}')" ondragover="dOver(event)" ondrop="dDrop(event,'${p.id}')" ondragleave="dLeave(event)"`:""}>
+      ${reordering?`draggable="true" ondragstart="dStart(event,'${p.id}')" ondragover="dOver(event)" ondrop="dDrop(event,'${p.id}')" ondragleave="dLeave(event)"`:""}
+    >
       <div class="card-img">
         ${p.image_url?`<img src="${e(p.image_url)}" loading="lazy" onerror="this.style.opacity=0">`:``}
-        <div class="card-img-ph" style="${p.image_url?'z-index:-1':''}">🎮</div>
+        <div class="card-img-ph" style="${p.image_url?"z-index:-1":""}">🎮</div>
         ${i<2?'<div class="card-lbl">NEW</div>':""}
         <div class="drag-handle">⣿</div>
+        <button class="card-share" onclick="shareProduct('${p.id}',event)" title="Скопировать ссылку">🔗</button>
       </div>
       <div class="card-body">
         ${p.category?`<div class="card-cat">${e(p.category)}</div>`:""}
         <div class="card-name">${e(p.name)}</div>
         ${p.description?`<div class="card-desc">${e(p.description)}</div>`:""}
+        ${p.tags?`<div class="card-tags">${renderTags(p.tags)}</div>`:""}
         <div class="card-ft">
           <div class="card-price">${fmt(p.price)}<span> ₽</span></div>
           <div style="display:flex;gap:6px" onclick="event.stopPropagation()">
-            <button class="cbf ${favs.includes(p.id)?'on':''}" onclick="togFav('${p.id}',event)">${favs.includes(p.id)?'♥':'♡'}</button>
+            <button class="cbf ${favs.includes(p.id)?"on":""}" onclick="togFav('${p.id}',event)">${favs.includes(p.id)?"♥":"♡"}</button>
             <button class="cbb" onclick="buy('${p.id}',event)">Купить</button>
           </div>
         </div>
       </div>
-      <button class="card-del" onclick="quickDel('${p.id}',event)" title="Удалить товар">✕</button>
+      <div class="card-admin-btns" onclick="event.stopPropagation()">
+        <button class="cbtn cbtn-edit" onclick="openEditModal('${p.id}')" title="Редактировать">✏️</button>
+        <button class="cbtn cbtn-del" onclick="quickDel('${p.id}',event)" title="Удалить">✕</button>
+      </div>
     </div>
   `).join("");
 }
 
-function cardClick(ev,id){
-  if(adminMode||reordering) return;
-  openDetail(id);
-}
+function cardClick(ev,id){if(adminMode||reordering)return;openDetail(id);}
 
-// ─── QUICK DELETE ───
-async function quickDel(id,ev){
+// ── SHARE ──
+function shareProduct(id,ev){
   ev.stopPropagation();
-  if(!confirm("Удалить этот товар?")) return;
-  try{
-    await sb(`products?id=eq.${id}`,{method:"DELETE"});
-    allProducts=allProducts.filter(p=>p.id!==id);
-    favs=favs.filter(f=>f!==id);
-    localStorage.setItem("mz_f",JSON.stringify(favs));
-    updFavDot();render();
-    toast("Товар удалён");
-  }catch(e){toast("Ошибка","er");}
+  const url=`${location.origin}${location.pathname}#product-${id}`;
+  navigator.clipboard.writeText(url).then(()=>toast("Ссылка скопирована","ok")).catch(()=>toast("Не удалось скопировать","er"));
 }
 
-// ─── ADMIN MODE ───
-function enterAdmin(){
-  adminMode=true;
-  document.getElementById("adminBar").classList.add("on");
-  render();
-}
-function exitAdmin(){
-  adminMode=false;
-  cancelReorder();
-  document.getElementById("adminBar").classList.remove("on");
-  render();
-}
-
-// ─── DRAG REORDER ───
-function toggleReorder(){
-  reordering=!reordering;
-  document.getElementById("reorderBar").classList.toggle("on",reordering);
-  document.getElementById("reorderBtnBar").textContent=reordering?"⇅ Отмена":"⇅ Порядок";
-  render();
-}
-function cancelReorder(){
-  reordering=false;
-  document.getElementById("reorderBar").classList.remove("on");
-  if(document.getElementById("reorderBtnBar"))
-    document.getElementById("reorderBtnBar").textContent="⇅ Порядок";
-  render();
-}
-function dStart(ev,id){
-  dragSrcId=id;ev.dataTransfer.effectAllowed="move";
-  setTimeout(()=>ev.target.closest(".card")?.classList.add("dragging"),0);
-}
-function dOver(ev){ev.preventDefault();ev.target.closest(".card")?.classList.add("drag-over");}
-function dLeave(ev){ev.target.closest(".card")?.classList.remove("drag-over");}
-function dDrop(ev,targetId){
-  ev.preventDefault();ev.target.closest(".card")?.classList.remove("drag-over");
-  if(!dragSrcId||dragSrcId===targetId) return;
-  const si=displayedIds.indexOf(dragSrcId);
-  const ti=displayedIds.indexOf(targetId);
-  const sp=allProducts.find(p=>p.id===dragSrcId);
-  const tp=allProducts.find(p=>p.id===targetId);
-  if(sp&&tp){[sp.sort_order,tp.sort_order]=[tp.sort_order,sp.sort_order];}
-  allProducts.sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
-  render();
-}
-async function saveOrder(){
-  try{
-    const visible=displayedIds.map(id=>allProducts.find(p=>p.id===id)).filter(Boolean);
-    await Promise.all(visible.map((p,i)=>sb(`products?id=eq.${p.id}`,{method:"PATCH",body:JSON.stringify({sort_order:i})})));
-    toast("Порядок сохранён","ok");
-  }catch(e){toast("Ошибка","er");}
-  cancelReorder();
-}
-
-// ─── DETAIL ───
+// ── DETAIL ──
 function openDetail(id){
   const p=allProducts.find(x=>x.id===id);if(!p)return;
   const fv=favs.includes(id);
+  location.hash=`product-${id}`;
   document.getElementById("DC").innerHTML=`
     <div class="d-img-wrap">
       ${p.image_url?`<img class="d-img" src="${e(p.image_url)}" onerror="this.style.opacity=0">`:``}
-      <div class="d-img-ph" style="${p.image_url?'z-index:-1':''}">🎮</div>
+      <div class="d-img-ph" style="${p.image_url?"z-index:-1":""}">🎮</div>
     </div>
     <div class="d-body">
       ${p.category?`<div class="d-cat">${e(p.category)}</div>`:""}
       <div class="d-name">${e(p.name)}</div>
+      ${p.tags?`<div class="d-tags">${renderTags(p.tags,true)}</div>`:""}
       ${p.description?`<div class="d-desc">${e(p.description)}</div>`:""}
       <div class="d-price">${fmt(p.price)} ₽</div>
       <div class="d-acts">
         <button class="d-buy" onclick="buy('${id}')">Купить в Telegram</button>
-        <button class="d-fav ${fv?'on':''}" id="DB" onclick="togFav('${id}')">${fv?'♥':'♡'}</button>
+        <button class="d-share" onclick="shareProduct('${id}',event)">🔗 Поделиться</button>
+        <button class="d-fav ${fv?"on":""}" id="DB" onclick="togFav('${id}')">${fv?"♥":"♡"}</button>
       </div>
       <p class="d-note">Нажав «Купить», вы перейдёте в Telegram для оформления заказа</p>
     </div>
@@ -586,21 +669,22 @@ function openDetail(id){
   op("ovD");
 }
 
+// ── BUY ──
 function buy(id,ev){
   if(ev)ev.stopPropagation();
   const p=allProducts.find(x=>x.id===id);
-  window.open(`https://t.me/${tg}?text=${encodeURIComponent(`Привет! Хочу купить: ${p?p.name:''} — ${p?fmt(p.price):''}₽`)}`,'_blank');
+  window.open(`https://t.me/${tg}?text=${encodeURIComponent(`Привет! Хочу купить: ${p?p.name:""} — ${p?fmt(p.price):""}₽`)}`,"_blank");
 }
 
-// ─── FAVS ───
+// ── FAVS ──
 function togFav(id,ev){
   if(ev)ev.stopPropagation();
   if(favs.includes(id)){favs=favs.filter(x=>x!==id);toast("Удалено из избранного");}
-  else{favs.push(id);toast("Добавлено в избранное","ok");}
+  else{favs.push(id);toast("Добавлено ♥","ok");}
   localStorage.setItem("mz_f",JSON.stringify(favs));
   updFavDot();render();
   const b=document.getElementById("DB");
-  if(b){b.textContent=favs.includes(id)?'♥':'♡';b.classList.toggle('on',favs.includes(id));}
+  if(b){b.textContent=favs.includes(id)?"♥":"♡";b.classList.toggle("on",favs.includes(id));}
 }
 function updFavDot(){const d=document.getElementById("favDot");d.textContent=favs.length;d.style.display=favs.length?"flex":"none";}
 function openFavs(){
@@ -611,10 +695,11 @@ function openFavs(){
     <div class="card" onclick="openDetail('${p.id}');cl('ovF')">
       <div class="card-img">
         ${p.image_url?`<img src="${e(p.image_url)}" loading="lazy" onerror="this.style.opacity=0">`:``}
-        <div class="card-img-ph" style="${p.image_url?'z-index:-1':''}">🎮</div>
+        <div class="card-img-ph" style="${p.image_url?"z-index:-1":""}">🎮</div>
       </div>
       <div class="card-body">
         <div class="card-name">${e(p.name)}</div>
+        ${p.tags?`<div class="card-tags">${renderTags(p.tags)}</div>`:""}
         <div class="card-ft">
           <div class="card-price">${fmt(p.price)}<span> ₽</span></div>
           <div onclick="event.stopPropagation()">
@@ -627,12 +712,11 @@ function openFavs(){
   op("ovF");
 }
 
-// ─── AUTH ───
+// ── AUTH ──
 function openAuth(){
   document.getElementById("PI").value="";
   const m=document.getElementById("PE");m.className="fmsg";m.style.display="none";
-  op("ovP");
-  setTimeout(()=>document.getElementById("PI").focus(),220);
+  op("ovP");setTimeout(()=>document.getElementById("PI").focus(),220);
 }
 function chkP(){
   if(document.getElementById("PI").value===PWD){cl("ovP");enterAdmin();openAdmin();}
@@ -643,130 +727,127 @@ function chkP(){
   }
 }
 
-// ─── ADMIN PANEL ───
-function openAdmin(){
-  atab("add",document.querySelectorAll(".at")[0]);
-  document.getElementById("STg").value=tg;
-  pendImg=null;
-  ["nN","nPr","nD","nIU"].forEach(id=>document.getElementById(id).value="");
-  document.getElementById("IA").innerHTML='<span>+ Нажмите для загрузки или введите URL</span>';
-  ["AOk","AEr","SOk","COk","ASok"].forEach(id=>{const x=document.getElementById(id);x.className="fmsg";x.style.display="none";});
-  const sel=document.getElementById("nCol");
-  sel.innerHTML='<option value="">Без папки</option>';
-  allCols.forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=`${c.emoji||'📦'} ${c.name}`;sel.appendChild(o);});
-  op("ovA");
+// ── ADMIN MODE ──
+function enterAdmin(){adminMode=true;document.getElementById("adminBar").classList.add("on");render();}
+function exitAdmin(){adminMode=false;cancelReorder();document.getElementById("adminBar").classList.remove("on");render();}
+
+// ── EDIT PRODUCT ──
+function openEditModal(id){
+  const p=allProducts.find(x=>x.id===id);if(!p)return;
+  editingId=id;
+  // Switch to list tab in admin panel and scroll to item
+  cl("ovD");
+  if(!document.getElementById("ovA").classList.contains("on")){
+    openAdmin();
+  }
+  atab("list",document.querySelectorAll(".at")[1]);
+  // Wait for render
+  setTimeout(()=>{
+    const row=document.querySelector(`.api[data-id="${id}"]`);
+    if(row){
+      row.scrollIntoView({behavior:"smooth",block:"center"});
+      openEditForm(id);
+    }
+  },100);
 }
 
-function atab(name,btn){
-  document.querySelectorAll(".at").forEach(b=>b.classList.remove("on"));
-  document.querySelectorAll(".ts").forEach(s=>s.classList.remove("on"));
-  btn.classList.add("on");document.getElementById("ts-"+name).classList.add("on");
-  if(name==="list") rAPL();
-  if(name==="cols") rAdminCols();
+function openEditForm(id){
+  // Close all open edit forms
+  document.querySelectorAll(".edit-form.on").forEach(f=>f.classList.remove("on"));
+  editingId=id;
+  const form=document.getElementById(`ef-${id}`);
+  if(form) form.classList.add("on");
 }
 
 function rAPL(){
   const el=document.getElementById("APL");
   if(!allProducts.length){el.innerHTML=`<p style="text-align:center;padding:36px;color:var(--text3);font-size:13px">Товаров нет</p>`;return;}
   el.innerHTML=allProducts.map(p=>`
-    <div class="api">
-      ${p.image_url?`<img src="${e(p.image_url)}" onerror="this.style.display='none'">`:`<div class="iph">🎮</div>`}
+    <div class="api" data-id="${p.id}">
+      ${p.image_url?`<img src="${e(p.image_url)}" onerror="this.style.display='none'">`:``}
+      ${!p.image_url?`<div class="iph">🎮</div>`:`<div class="iph" style="display:none">🎮</div>`}
       <div class="api-info">
         <div class="api-name">${e(p.name)}</div>
-        <div class="api-price">${fmt(p.price)} ₽${p.collection_id?' · '+(allCols.find(c=>c.id===p.collection_id)?.name||''):''}</div>
+        <div class="api-price">${fmt(p.price)} ₽${p.collection_id?" · "+(allCols.find(c=>c.id===p.collection_id)?.name||""):""}</div>
       </div>
-      <button class="bdan" style="height:28px;padding:0 10px;font-size:12px" onclick="delP('${p.id}')">Удалить</button>
+      <div class="api-actions">
+        <button class="api-btn" onclick="openEditForm('${p.id}')">✏️ Изм.</button>
+        <button class="api-btn danger" onclick="delP('${p.id}')">Удалить</button>
+      </div>
+    </div>
+    <div class="edit-form" id="ef-${p.id}">
+      <div class="edit-row">
+        <input class="fi" id="en-${p.id}" type="text" value="${e(p.name)}" placeholder="Название" maxlength="120">
+        <input class="fi" id="ep-${p.id}" type="number" value="${p.price}" placeholder="Цена" style="max-width:100px">
+      </div>
+      <div class="edit-row">
+        <input class="fi" id="eiu-${p.id}" type="url" value="${e(p.image_url||"")}" placeholder="URL фото">
+        <select class="fsel" id="ec-${p.id}" style="max-width:150px">
+          <option value="">Без категории</option>
+          <option ${p.category==="Аккаунты"?"selected":""}>Аккаунты</option>
+          <option ${p.category==="Игровая валюта"?"selected":""}>Игровая валюта</option>
+          <option ${p.category==="Предметы"?"selected":""}>Предметы</option>
+          <option ${p.category==="Другое"?"selected":""}>Другое</option>
+        </select>
+      </div>
+      <div style="margin-bottom:8px">
+        <input class="fi" id="et-${p.id}" type="text" value="${e(p.tags||"")}" placeholder="Теги через запятую: 🔥 Горячее, 💸 Скидка">
+      </div>
+      <textarea class="fta" id="ed-${p.id}" placeholder="Описание…" style="min-height:52px">${e(p.description||"")}</textarea>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="bsub" style="flex:1" onclick="saveEdit('${p.id}')">Сохранить</button>
+        <button class="bsub" style="background:var(--border);color:var(--text2);width:80px" onclick="document.getElementById('ef-${p.id}').classList.remove('on')">Отмена</button>
+      </div>
+      <div class="fmsg" id="esave-${p.id}">Сохранено</div>
     </div>
   `).join("");
 }
 
-// ─── COLLECTIONS ADMIN ───
-function rAdminCols(){
-  document.getElementById("assignSection").style.display="none";
-  const el=document.getElementById("adminColList");
-  if(!allCols.length){el.innerHTML=`<p style="font-size:13px;color:var(--text3);margin-bottom:12px">Папок пока нет</p>`;return;}
-  el.innerHTML=allCols.map(c=>{
-    const cnt=allProducts.filter(p=>p.collection_id===c.id).length;
-    return `<div class="col-item">
-      <span class="ce">${c.emoji||'📦'}</span>
-      <span class="cn">${e(c.name)}</span>
-      <span class="cc">${cnt} товар${suf(cnt)}</span>
-      <button class="hbtn" style="height:28px;font-size:12px" onclick="openAssign('${c.id}')">Товары</button>
-      <button class="bdan" style="height:28px;padding:0 10px;font-size:12px" onclick="delCol('${c.id}')">✕</button>
-    </div>`;
-  }).join("");
-}
-
-async function createCol(){
-  const name=document.getElementById("newColName").value.trim();
-  const emoji=document.getElementById("newColEmoji").value.trim()||"📦";
-  if(!name) return;
+async function saveEdit(id){
+  const name=document.getElementById(`en-${id}`).value.trim();
+  const price=parseFloat(document.getElementById(`ep-${id}`).value);
+  if(!name||isNaN(price)){toast("Заполните название и цену","er");return;}
+  const imgUrl=document.getElementById(`eiu-${id}`).value.trim()||null;
+  const cat=document.getElementById(`ec-${id}`).value||null;
+  const desc=document.getElementById(`ed-${id}`).value.trim()||null;
+  const tags=document.getElementById(`et-${id}`).value.trim()||null;
   try{
-    const res=await sb("collections",{method:"POST",body:JSON.stringify({name,emoji,sort_order:allCols.length})});
-    if(res&&res[0]) allCols.push(res[0]);
-    document.getElementById("newColName").value="";
-    const x=document.getElementById("COk");x.className="fmsg ok";x.style.display="block";
+    await sb(`products?id=eq.${id}`,{method:"PATCH",body:JSON.stringify({name,price,image_url:imgUrl,category:cat,description:desc,tags})});
+    const p=allProducts.find(x=>x.id===id);
+    if(p) Object.assign(p,{name,price,image_url:imgUrl,category:cat,description:desc,tags});
+    render();
+    const x=document.getElementById(`esave-${id}`);x.className="fmsg ok";x.style.display="block";
     setTimeout(()=>{x.className="fmsg";x.style.display="none";},2500);
-    rAdminCols();renderColBar();
-    const sel=document.getElementById("nCol");
-    const o=document.createElement("option");o.value=res[0].id;o.textContent=`${emoji} ${name}`;sel.appendChild(o);
-    toast(`Папка «${name}» создана`,"ok");
-  }catch(e){toast("Ошибка","er");}
-}
-
-async function delCol(id){
-  if(!confirm("Удалить папку? Товары останутся без папки.")) return;
-  try{
-    await sb(`collections?id=eq.${id}`,{method:"DELETE"});
-    allCols=allCols.filter(c=>c.id!==id);
-    allProducts.forEach(p=>{if(p.collection_id===id)p.collection_id=null;});
-    if(activeCol===id) activeCol=null;
-    rAdminCols();renderColBar();render();
-    toast("Папка удалена");
-  }catch(e){toast("Ошибка","er");}
-}
-
-function openAssign(colId){
-  assignColId=colId;
-  const col=allCols.find(c=>c.id===colId);
-  assignSelected=new Set(allProducts.filter(p=>p.collection_id===colId).map(p=>p.id));
-  document.getElementById("assignColName").textContent=col?.name||"";
-  document.getElementById("assignList").innerHTML=allProducts.map(p=>`
-    <div class="assign-item${assignSelected.has(p.id)?' sel':''}" onclick="togAssign('${p.id}',this)">
-      ${p.image_url?`<img src="${e(p.image_url)}" onerror="this.style.display='none'">`:``}
-      ${!p.image_url?`<div class="iph2">🎮</div>`:`<div class="iph2" style="display:none">🎮</div>`}
-      <span class="aname">${e(p.name)} <span style="color:var(--text3);font-size:11px">${fmt(p.price)}₽</span></span>
-      <span class="chk">${assignSelected.has(p.id)?'✓':''}</span>
-    </div>
-  `).join("");
-  document.getElementById("assignSection").style.display="block";
-  document.getElementById("assignSection").scrollIntoView({behavior:"smooth"});
-}
-
-function togAssign(id,el){
-  if(assignSelected.has(id)){assignSelected.delete(id);el.classList.remove("sel");el.querySelector(".chk").textContent="";}
-  else{assignSelected.add(id);el.classList.add("sel");el.querySelector(".chk").textContent="✓";}
-}
-
-async function saveAssign(){
-  try{
-    await sb(`products?collection_id=eq.${assignColId}`,{method:"PATCH",body:JSON.stringify({collection_id:null})});
-    if(assignSelected.size>0){
-      const ids=[...assignSelected].map(id=>`id=eq.${id}`).join(",");
-      await sb(`products?or=(${ids})`,{method:"PATCH",body:JSON.stringify({collection_id:assignColId})});
-    }
-    allProducts.forEach(p=>{
-      if(p.collection_id===assignColId) p.collection_id=null;
-      if(assignSelected.has(p.id)) p.collection_id=assignColId;
-    });
-    const x=document.getElementById("ASok");x.className="fmsg ok";x.style.display="block";
-    setTimeout(()=>{x.className="fmsg";x.style.display="none";},2500);
-    rAdminCols();render();
-    toast("Товары обновлены","ok");
+    toast("Изменения сохранены","ok");
   }catch(err){toast("Ошибка","er");}
 }
 
-// ─── ADD/DELETE PRODUCTS ───
+// ── QUICK DELETE ──
+async function quickDel(id,ev){
+  ev.stopPropagation();
+  if(!confirm("Удалить этот товар?"))return;
+  try{
+    await sb(`products?id=eq.${id}`,{method:"DELETE"});
+    allProducts=allProducts.filter(p=>p.id!==id);
+    favs=favs.filter(f=>f!==id);localStorage.setItem("mz_f",JSON.stringify(favs));
+    updFavDot();render();toast("Товар удалён");
+  }catch(e){toast("Ошибка","er");}
+}
+
+// ── TAGS IN ADD FORM ──
+function togTag(btn){
+  const tag=btn.dataset.tag;
+  if(selectedTags.has(tag)){selectedTags.delete(tag);btn.classList.remove("on");}
+  else{selectedTags.add(tag);btn.classList.add("on");}
+}
+function getTagsForSubmit(){
+  const custom=document.getElementById("nTagCustom").value.trim();
+  const all=[...selectedTags];
+  if(custom) all.push(custom);
+  return all.join(",") || null;
+}
+
+// ── ADD PRODUCT ──
 async function addP(){
   const name=document.getElementById("nN").value.trim();
   const price=parseFloat(document.getElementById("nPr").value);
@@ -777,21 +858,24 @@ async function addP(){
     let imgUrl=document.getElementById("nIU").value.trim()||null;
     const fi=document.getElementById("NF");
     if(fi.files[0]){toast("Загружаем фото…");const up=await uploadImg(fi.files[0]);if(up) imgUrl=up;}
-    const colVal=document.getElementById("nCol").value||null;
     const res=await sb("products",{method:"POST",body:JSON.stringify({
       name,price,
       description:document.getElementById("nD").value.trim()||null,
       image_url:imgUrl,
       category:document.getElementById("nCt").value||null,
-      collection_id:colVal,
+      collection_id:document.getElementById("nCol").value||null,
+      tags:getTagsForSubmit(),
       sort_order:allProducts.length
     })});
     if(res&&res[0]) allProducts.unshift(res[0]);
     else allProducts=await sb("products?select=*&order=sort_order.asc,created_at.desc");
     render();
     ["nN","nPr","nD","nIU"].forEach(id=>document.getElementById(id).value="");
+    selectedTags.clear();
+    document.querySelectorAll(".tag-opt").forEach(b=>b.classList.remove("on"));
+    document.getElementById("nTagCustom").value="";
     pendImg=null;fi.value="";
-    document.getElementById("IA").innerHTML='<span>+ Нажмите для загрузки или введите URL</span>';
+    document.getElementById("IA").innerHTML="<span>+ Нажмите для загрузки или введите URL</span>";
     const x=document.getElementById("AOk");x.className="fmsg ok";x.style.display="block";
     setTimeout(()=>{x.className="fmsg";x.style.display="none";},3000);
     toast(`«${name}» добавлен`,"ok");
@@ -800,7 +884,7 @@ async function addP(){
 }
 
 async function delP(id){
-  if(!confirm("Удалить этот товар?")) return;
+  if(!confirm("Удалить этот товар?"))return;
   try{
     await sb(`products?id=eq.${id}`,{method:"DELETE"});
     allProducts=allProducts.filter(p=>p.id!==id);
@@ -810,7 +894,7 @@ async function delP(id){
 }
 
 async function clrAll(){
-  if(!confirm("Удалить ВСЕ товары?")) return;
+  if(!confirm("Удалить ВСЕ товары?"))return;
   try{
     await sb("products?id=neq.00000000-0000-0000-0000-000000000000",{method:"DELETE"});
     allProducts=[];favs=[];localStorage.setItem("mz_f","[]");
@@ -826,23 +910,136 @@ function saveTg(){
   toast("Telegram обновлён","ok");
 }
 
-// ─── IMAGE ───
+// ── COLLECTIONS ──
+function rAdminCols(){
+  document.getElementById("assignSection").style.display="none";
+  const el=document.getElementById("adminColList");
+  if(!allCols.length){el.innerHTML=`<p style="font-size:13px;color:var(--text3);margin-bottom:12px">Папок пока нет</p>`;return;}
+  el.innerHTML=allCols.map(c=>{
+    const cnt=allProducts.filter(p=>p.collection_id===c.id).length;
+    return `<div class="col-item">
+      <span class="ce">${c.emoji||"📦"}</span>
+      <span class="cn">${e(c.name)}</span>
+      <span class="cc">${cnt} товар${suf(cnt)}</span>
+      <button class="hbtn" style="height:28px;font-size:12px" onclick="openAssign('${c.id}')">Товары</button>
+      <button class="bdan" style="height:28px;padding:0 10px;font-size:12px" onclick="delCol('${c.id}')">✕</button>
+    </div>`;
+  }).join("");
+}
+async function createCol(){
+  const name=document.getElementById("newColName").value.trim();
+  const emoji=document.getElementById("newColEmoji").value.trim()||"📦";
+  if(!name)return;
+  try{
+    const res=await sb("collections",{method:"POST",body:JSON.stringify({name,emoji,sort_order:allCols.length})});
+    if(res&&res[0]) allCols.push(res[0]);
+    document.getElementById("newColName").value="";
+    const x=document.getElementById("COk");x.className="fmsg ok";x.style.display="block";
+    setTimeout(()=>{x.className="fmsg";x.style.display="none";},2500);
+    rAdminCols();renderColBar();
+    const sel=document.getElementById("nCol");
+    const o=document.createElement("option");o.value=res[0].id;o.textContent=`${emoji} ${name}`;sel.appendChild(o);
+    toast(`Папка «${name}» создана`,"ok");
+  }catch(e){toast("Ошибка","er");}
+}
+async function delCol(id){
+  if(!confirm("Удалить папку?"))return;
+  try{
+    await sb(`collections?id=eq.${id}`,{method:"DELETE"});
+    allCols=allCols.filter(c=>c.id!==id);
+    allProducts.forEach(p=>{if(p.collection_id===id)p.collection_id=null;});
+    if(activeCol===id) activeCol=null;
+    rAdminCols();renderColBar();render();toast("Папка удалена");
+  }catch(e){toast("Ошибка","er");}
+}
+function openAssign(colId){
+  assignColId=colId;
+  const col=allCols.find(c=>c.id===colId);
+  assignSelected=new Set(allProducts.filter(p=>p.collection_id===colId).map(p=>p.id));
+  document.getElementById("assignColName").textContent=col?.name||"";
+  document.getElementById("assignList").innerHTML=allProducts.map(p=>`
+    <div class="assign-item${assignSelected.has(p.id)?" sel":""}" onclick="togAssign('${p.id}',this)">
+      ${p.image_url?`<img src="${e(p.image_url)}" onerror="this.style.display='none'">`:``}
+      ${!p.image_url?`<div class="iph2">🎮</div>`:`<div class="iph2" style="display:none">🎮</div>`}
+      <span class="aname">${e(p.name)} <span style="color:var(--text3);font-size:11px">${fmt(p.price)}₽</span></span>
+      <span class="chk">${assignSelected.has(p.id)?"✓":""}</span>
+    </div>
+  `).join("");
+  document.getElementById("assignSection").style.display="block";
+  document.getElementById("assignSection").scrollIntoView({behavior:"smooth"});
+}
+function togAssign(id,el){
+  if(assignSelected.has(id)){assignSelected.delete(id);el.classList.remove("sel");el.querySelector(".chk").textContent="";}
+  else{assignSelected.add(id);el.classList.add("sel");el.querySelector(".chk").textContent="✓";}
+}
+async function saveAssign(){
+  try{
+    await sb(`products?collection_id=eq.${assignColId}`,{method:"PATCH",body:JSON.stringify({collection_id:null})});
+    if(assignSelected.size>0){
+      const ids=[...assignSelected].map(id=>`id=eq.${id}`).join(",");
+      await sb(`products?or=(${ids})`,{method:"PATCH",body:JSON.stringify({collection_id:assignColId})});
+    }
+    allProducts.forEach(p=>{
+      if(p.collection_id===assignColId) p.collection_id=null;
+      if(assignSelected.has(p.id)) p.collection_id=assignColId;
+    });
+    const x=document.getElementById("ASok");x.className="fmsg ok";x.style.display="block";
+    setTimeout(()=>{x.className="fmsg";x.style.display="none";},2500);
+    rAdminCols();render();toast("Товары обновлены","ok");
+  }catch(err){toast("Ошибка","er");}
+}
+
+// ── DRAG REORDER ──
+function toggleReorder(){
+  reordering=!reordering;
+  document.getElementById("reorderBar").classList.toggle("on",reordering);
+  document.getElementById("reorderBtnBar").textContent=reordering?"⇅ Отмена":"⇅ Порядок";
+  render();
+}
+function cancelReorder(){
+  reordering=false;
+  document.getElementById("reorderBar").classList.remove("on");
+  const b=document.getElementById("reorderBtnBar");if(b) b.textContent="⇅ Порядок";
+  render();
+}
+function dStart(ev,id){dragSrcId=id;ev.dataTransfer.effectAllowed="move";setTimeout(()=>ev.target.closest(".card")?.classList.add("dragging"),0);}
+function dOver(ev){ev.preventDefault();ev.target.closest(".card")?.classList.add("drag-over");}
+function dLeave(ev){ev.target.closest(".card")?.classList.remove("drag-over");}
+function dDrop(ev,targetId){
+  ev.preventDefault();ev.target.closest(".card")?.classList.remove("drag-over");
+  if(!dragSrcId||dragSrcId===targetId)return;
+  const sp=allProducts.find(p=>p.id===dragSrcId);
+  const tp=allProducts.find(p=>p.id===targetId);
+  if(sp&&tp){[sp.sort_order,tp.sort_order]=[tp.sort_order,sp.sort_order];}
+  allProducts.sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+  render();
+}
+async function saveOrder(){
+  try{
+    const visible=displayedIds.map(id=>allProducts.find(p=>p.id===id)).filter(Boolean);
+    await Promise.all(visible.map((p,i)=>sb(`products?id=eq.${p.id}`,{method:"PATCH",body:JSON.stringify({sort_order:i})})));
+    toast("Порядок сохранён","ok");
+  }catch(e){toast("Ошибка","er");}
+  cancelReorder();
+}
+
+// ── IMAGE ──
 async function uploadImg(file){
-  const ext=file.name.split('.').pop();
+  const ext=file.name.split(".").pop();
   const name=`${Date.now()}.${ext}`;
   const r=await fetch(`${SB_URL}/storage/v1/object/product-images/${name}`,{
     method:"POST",
     headers:{"apikey":SB_KEY,"Authorization":`Bearer ${SB_KEY}`,"Content-Type":file.type,"x-upsert":"true"},
     body:file
   });
-  if(r.ok) return `${SB_URL}/storage/v1/object/public/product-images/${name}`;
+  if(r.ok)return `${SB_URL}/storage/v1/object/public/product-images/${name}`;
   return null;
 }
 function pUrl(){
   const url=document.getElementById("nIU").value.trim();
   const ia=document.getElementById("IA");
   if(url){ia.innerHTML=`<img src="${url}" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML='<span>Не удалось загрузить</span>'">`;pendImg=null;}
-  else{ia.innerHTML='<span>+ Нажмите для загрузки или введите URL</span>';}
+  else{ia.innerHTML="<span>+ Нажмите для загрузки или введите URL</span>";}
 }
 function hFile(){
   const f=document.getElementById("NF").files[0];if(!f)return;
@@ -851,21 +1048,54 @@ function hFile(){
   r.readAsDataURL(f);
 }
 
+// ── ADMIN PANEL ──
+function openAdmin(){
+  atab("add",document.querySelectorAll(".at")[0]);
+  document.getElementById("STg").value=tg;
+  pendImg=null;
+  ["nN","nPr","nD","nIU"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("IA").innerHTML="<span>+ Нажмите для загрузки или введите URL</span>";
+  ["AOk","AEr","SOk","COk","ASok"].forEach(id=>{const x=document.getElementById(id);x.className="fmsg";x.style.display="none";});
+  selectedTags.clear();document.querySelectorAll(".tag-opt").forEach(b=>b.classList.remove("on"));
+  document.getElementById("nTagCustom").value="";
+  const sel=document.getElementById("nCol");
+  sel.innerHTML='<option value="">Без папки</option>';
+  allCols.forEach(c=>{const o=document.createElement("option");o.value=c.id;o.textContent=`${c.emoji||"📦"} ${c.name}`;sel.appendChild(o);});
+  op("ovA");
+}
+function atab(name,btn){
+  document.querySelectorAll(".at").forEach(b=>b.classList.remove("on"));
+  document.querySelectorAll(".ts").forEach(s=>s.classList.remove("on"));
+  btn.classList.add("on");document.getElementById("ts-"+name).classList.add("on");
+  if(name==="list") rAPL();
+  if(name==="cols") rAdminCols();
+}
+
+// ── SORT ──
 function srt(v,btn){
   sortMode=v;document.querySelectorAll(".tbbtn").forEach(b=>b.classList.remove("on"));btn.classList.add("on");
-  if(reordering) cancelReorder();render();
+  if(reordering)cancelReorder();render();
 }
+
+// ── MODAL ──
 function op(id){document.getElementById(id).classList.add("on");document.body.style.overflow="hidden";}
-function cl(id){document.getElementById(id).classList.remove("on");document.body.style.overflow="";}
+function cl(id){
+  document.getElementById(id).classList.remove("on");document.body.style.overflow="";
+  if(id==="ovD"&&location.hash.startsWith("#product-")) history.replaceState(null,null," ");
+}
 function ovc(ev,id){if(ev.target===document.getElementById(id))cl(id);}
+
+// ── TOAST ──
 function toast(msg,type){
   const c=document.getElementById("TW");const d=document.createElement("div");
   d.className=`tst${type?" "+type:""}`;d.textContent=msg;c.appendChild(d);
   setTimeout(()=>{d.style.cssText="opacity:0;transform:translateX(10px);transition:.2s";setTimeout(()=>d.remove(),200);},2300);
 }
+
 function e(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function fmt(n){return Number(n).toLocaleString("ru-RU")}
 function suf(n){if(n%10===1&&n%100!==11)return"";if([2,3,4].includes(n%10)&&![12,13,14].includes(n%100))return"а";return"ов"}
+
 document.addEventListener("keydown",ev=>{if(ev.key==="Escape")["ovD","ovA","ovP","ovF"].forEach(id=>cl(id));});
 </script>
 </body>
